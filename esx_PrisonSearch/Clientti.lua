@@ -32,7 +32,6 @@ Citizen.CreateThread(function()
 		if(GetDistanceBetweenCoords(Paikka, v.x, v.y, v.z, true) < 1.0) and v.roskis == false then
                     Teksi(v.x, v.y, v.z, '~w~[~g~E~w~] Tutkiaksesi roskiksen', 0.6)
                       if IsControlJustPressed(1, 38) then
-                        v.roskis = true
                           FreezeEntityPosition(Pelaaja, true)
                             TaskStartScenarioInPlace(Pelaaja, 'PROP_HUMAN_BUM_BIN', 0, true)
                               exports['progressBars']:startUI(20000, 'Tutkit roskista')
@@ -40,6 +39,7 @@ Citizen.CreateThread(function()
                                  ClearPedTasksImmediately(Pelaaja)
                                   FreezeEntityPosition(Pelaaja, false)
                                    TriggerServerEvent('BubsiRoskis', source)
+				      v.roskis = true
                         end
                  end
           end
@@ -56,7 +56,6 @@ Citizen.CreateThread(function()
 		if(GetDistanceBetweenCoords(Paikka, v.x, v.y, v.z, true) < 1.0) and v.kaappi == false then
                     Teksi(v.x, v.y, v.z, '~w~[~g~E~w~] Tutkiaksesi hyllyn', 0.6)
                       if IsControlJustPressed(1, 38) then
-                        v.kaappi = true
                           FreezeEntityPosition(Pelaaja, true)
                             TaskStartScenarioInPlace(Pelaaja, 'PROP_HUMAN_BUM_BIN', 0, true)
                               exports['progressBars']:startUI(20000, 'Tutkit hyllyä')
@@ -64,6 +63,7 @@ Citizen.CreateThread(function()
                                  ClearPedTasksImmediately(Pelaaja)
                                   FreezeEntityPosition(Pelaaja, false)
                                    TriggerServerEvent('BubsiKaappi', source)
+                        	     v.kaappi = true
                         end
                  end
           end
@@ -73,8 +73,23 @@ end)
 Citizen.CreateThread(function()
     while true do 
         Citizen.Wait(10)
-            if roskis == true or kaappi == true then
+	 for i,v in pairs(Config.Roskis) do
+            if v.roskis == true then
                 Citizen.Wait(Config.aika)
-        end
+		  v.roskis = false
+       end
      end
+   end
+end)
+
+Citizen.CreateThread(function()
+    while true do 
+        Citizen.Wait(10)
+	 for i,v in pairs(Config.Kaappi) do
+            if v.kaappi == true then
+                Citizen.Wait(Config.aika)
+		  v.kaappi = false
+       end
+     end
+   end
 end)
