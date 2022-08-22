@@ -1,6 +1,6 @@
 Config = {}
 -- Discord Logs --
-Config.WEBHOOKKI = 'https://discord.com/api/webhooks/1001625686127149106/sWwUUmDCSxUZZDuGpF_v30eEKqQXY5zRy0EgTLRDFRiBfXPVVFtLT2cUpEFBDazDSNCx' --Discord Webhook
+Config.WEBHOOKKI = 'WEBHOOK_HERE' --Discord Webhook
 Config.BotinNimi = "ValorRp" -- bots name
 Config.vari = 86851 -- Bot embed colour
 
